@@ -1,0 +1,21 @@
+{
+  "ALCHEMY": true,
+  "CONTRAST_RATIO": 0.5,
+  "PROMPT_MAGIC": false,
+  "PROMPT_MAGIC_STRENGTH": 0.75,
+  "PROMPT_MAGIC_VERSION": "v3",
+  "PUBLIC": false,
+  "SCHEDULER": "LEONARDO",
+  "NSFW": false,
+  "NUM_IMAGES": 1,
+  "PRESET_STYLE": "CREATIVE",
+  "PHOTOREALSTRENGTH": 0.6,
+  "EXPANDED_DOMAIN": false,
+  "GUIDANCE_SCALE": 6,
+  "NUM_INFERENCE_STEPS": 15,
+  "HIGH_CONTRAST": false,
+  "WEIGHTING": 0.75,
+  "SD_VERSION": "SDXL_0_9",
+  "TILING": false,
+  "PHOTO_REAL": false
+}
