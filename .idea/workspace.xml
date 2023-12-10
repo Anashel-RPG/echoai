@@ -4,82 +4,43 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ac0d8375-81f4-4d3d-b0cc-9900f9900d94" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/EchoAI.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/config-files/conversation-capture.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/config-files/leonardo.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/config-files/scene.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/config-files/structure.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/config-files/trigger.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/config.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/file_reader.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/image_downloader.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/job_data_store.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/job_manager.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/job_payload_creator.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ranking.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ranking_mac.sh" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ranking_windows.bat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/readme_img/api_key.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/readme_img/attributes.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/readme_img/cycle01.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/readme_img/cycle06.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/readme_img/cycle12.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/readme_img/cycle14.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/readme_img/cycle17.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/readme_img/cycle34.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/readme_img/cycle38.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/readme_img/cycle39.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/readme_img/cycle40.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/readme_img/cycle53.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/readme_img/cycle77.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/readme_img/default_codex.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/readme_img/demo01.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/readme_img/demo02.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/readme_img/demo03.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/readme_img/demo04.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/readme_img/demo05.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/readme_img/demo06.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/readme_img/demo07.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/readme_img/demo08.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/readme_img/demo09.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/readme_img/demo10.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/readme_img/demo11.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/readme_img/demo12.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/readme_img/echo-01.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/readme_img/echo-02.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/readme_img/echo-03.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/readme_img/echo-04.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/readme_img/echo-05.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/readme_img/exif.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/readme_img/override.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/readme_img/override_codex.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/readme_img/scene.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/readme_img/silver_key_echo_01.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/readme_img/silver_key_echo_02.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/readme_img/silver_key_echo_03.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/readme_img/silver_key_echo_04.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/readme_img/structure.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/readme_img/termina_images_done.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/screen.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/start_mac.sh" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/start_windows.bat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/trigger.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+    <list default="true" id="ac0d8375-81f4-4d3d-b0cc-9900f9900d94" name="Changes" comment="Version Alpha 0.1">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ranking_windows.bat" beforeDir="false" afterPath="$PROJECT_DIR$/ranking_windows.bat" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="ChangesViewManager" show_ignored="true">
+    <option name="groupingKeys">
+      <option value="directory" />
+    </option>
+  </component>
   <component name="Git.Settings">
+    <option name="PUSH_TAGS">
+      <GitPushTagMode>
+        <option name="argument" value="--tags" />
+        <option name="title" value="All" />
+      </GitPushTagMode>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;Anashel-RPG&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="selectedUrlAndAccountId">
+      <UrlAndAccount>
+        <option name="accountId" value="a7778055-1820-47f5-87af-6ac212f3bda3" />
+        <option name="url" value="https://github.com/Anashel-RPG/echoai.git" />
+      </UrlAndAccount>
+    </option>
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -160,8 +121,25 @@
       <workItem from="1702163840538" duration="8347000" />
       <workItem from="1702205969404" duration="22934000" />
       <workItem from="1702230355753" duration="65000" />
-      <workItem from="1702230576749" duration="90000" />
+      <workItem from="1702230576749" duration="2822000" />
     </task>
+    <task id="LOCAL-00001" summary="Version Alpha 0.1">
+      <option name="closed" value="true" />
+      <created>1702230707842</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1702230707842</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Version Alpha 0.1">
+      <option name="closed" value="true" />
+      <created>1702230799379</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1702230799379</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -169,5 +147,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value="Version Alpha 0.1" />
+    <option name="LAST_COMMIT_MESSAGE" value="Version Alpha 0.1" />
   </component>
 </project>

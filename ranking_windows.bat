@@ -15,7 +15,13 @@ call %VENV_DIR%\Scripts\activate.bat
 REM Checking and installing required packages
 echo Checking and installing required packages...
 python -m pip install --upgrade pip
-pip install PIL
+pip install pygame
+pip install watchdog
+pip install Pillow
+pip install requests
+pip install scikit-learn
+pip install openai
+pip install piexif
 
 REM Check if last command was successful
 if %errorlevel% neq 0 (
