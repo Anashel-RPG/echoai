@@ -1,0 +1,33 @@
+# override.txt
+############## IF WIZARD MODE IS DISABLE
+
+# Force a style for all scene (Set override to true)
+OVERRIDE = False
+REALISTIC_MODE = True
+
+# Style Override Midjourney
+REALISTIC_MODEL_MIDJOURNEY = " --style raw "
+CREATIVE_MODEL_MIDJOURNEY = " --stylize 250 "
+
+# Style Override CivitAI
+REALISTIC_MODEL_CIVITAI = "urn:air:sdxl:model:civitai:133005@240840"
+CREATIVE_MODEL_CIVITAI = "urn:air:sdxl:model:civitai:133005@240840"
+
+# Style Override Leonardo
+REALISTIC_MODEL_LEONARDO = "5c232a9e-9061-4777-980a-ddc8e65647c6"
+CREATIVE_MODEL_LEONARDO = "aa77f04e-3eec-4034-9c07-d0f619684628"
+
+# Style Override Prodia
+STYLE_PRODIA = "photographic"
+REALISTIC_MODE_PRODIA = "realismEngineSDXL_v10.safetensors [af771c3f]"
+CREATIVE_MODEL_PRODIA = "juggernautXL_v45.safetensors [e75f5471]"
+
+# Style Override Bank
+RPG_Character_Raw = "raw photo half body photo (accidental snapshot) candid casual beautiful <SCENE>, (detailed skin:1.2) with scar on the eyebrow, white hair, Winter snowing, stone wall depth of field, Night (soothing tones), High detail RAW color art, graffiti-covered walls, skinny figure with fancy hair, Ultra Sharp Focus (Smooth) Ultra High Definition (8k), Double exposure (Surreal light manipulation), skin details, royal cap with gold embroidery, film grain"
+RPG_Character = "digital-extreme-closeup-photo (accidental snapshot) candid casual <SCENE>, Winter snowing, Night (soothing tones), High detail RAW color art, graffiti-covered walls, skinny figure with fancy hair, Ultra Sharp Focus (Smooth) Ultra High Definition (8k), Double exposure (Surreal light manipulation)"
+RPG_Scene = "diablo 4 concept art real life raw depth of field of <SCENE>, vivid splashart color, Low fog, thick fog, realistic heavy details watercolor ink and acrylic, Boken, night medieval torch background, gothcore rudolph belarski, (Gritty urban reality), ray of light, god ray"
+40087bae-3d7b-4772-9ff4-81c2beb38e6b_1 = "<SCENE>, edgy vibe, deep night sky palette, brutalistic architecture in medieval universe, Melancholic and introspective lens, Double exposure"
+62b2a76b-89ee-4857-9827-18df8838b932_1 = "cinematic light epic shot <SCENE>, ethereal concept art, Dark tone, brutalistic architecture in modern universe, post-industrial dystopian films, angle shot"
+d834aa4f-07a0-4212-b430-fc20d86ff82a_1 = "high perspective close-up view <SCENE>, macro lens effect, Surreal light manipulation"
+2b2e8d3d-8375-47c2-9f10-e12a970b3e92_1 = "<SCENE>, realistic heavy details watercolor ink and acrylic, main color is black and white and red dripping, cyberpunk, Sony a7R IV camera Meike 85mm F1.8 lens, depth of field"
+25a547c3-08a1-4113-b5d7-f6a2f38f1967_2 = "Full body shot of <SCENE>, haunting gothic atmosphere, RAW photo, Monochromatic and eerie, bioluminescent accents, Sci-fi and fantasy fusion, full length 300mm lens f/1.8 Fujifilm Neopan 100, Gritty urban reality"

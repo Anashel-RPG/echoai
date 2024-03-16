@@ -1,0 +1,12 @@
+pygame
+watchdog
+Pillow
+requests
+scikit-learn
+openai
+piexif
+numpy
+sounddevice
+wavio
+soundfile
+colorama
