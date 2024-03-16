@@ -20,14 +20,9 @@ source "$VENV_DIR/bin/activate"
 
 # Checking and installing required packages
 echo "Checking and installing required packages..."
-pip install --upgrade pip
-pip install pygame
-pip install watchdog
-pip install Pillow
-pip install requests
-pip install scikit-learn
-pip install openai
-pip install piexif
+pip install --upgrade pip && \
+pip install pygame watchdog Pillow requests scikit-learn openai piexif colorama numpy sounddevice wavio soundfile
+
 
 # Check if the last command was successful
 if [ $? -ne 0 ]; then
@@ -37,7 +32,7 @@ fi
 
 # Launching main application
 echo "Launching main application..."
-python3 main.py
+"$VENV_DIR/bin/python" main.py
 
 # Deactivate the virtual environment on completion
 deactivate

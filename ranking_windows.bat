@@ -22,6 +22,11 @@ pip install requests
 pip install scikit-learn
 pip install openai
 pip install piexif
+pip install colorama
+pip install numpy
+pip install sounddevice
+pip install wavio
+pip install soundfile
 
 REM Check if last command was successful
 if %errorlevel% neq 0 (

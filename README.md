@@ -100,8 +100,7 @@ As I chronicle these logs, not all warrant detailed documentation, but this one,
 
 The default setting of EchoAI will produce around 12 images and should take 5 to 10 minutes on the first execution as it sets up a download of its Python dependencies. Be patient!
 
-The first run will consume about 261 API credits.
-- #### On macOS, type `sudo su` in your terminal, hit enter, and authenticate with your password. Drag the file [start_mac.sh](start_mac.sh) into your terminal window and hit enter.
+- #### On macOS, type `chmod +x ` in your terminal and drag the file [start_mac.sh](start_mac.sh) into your terminal window and hit enter. Once the file permission is set, simply drag again [start_mac.sh](start_mac.sh) and hit enter
 - #### On Windows, double-click the file [start_windows.bat](start_windows.bat).
 
 Your EchoAI images will be automatically saved in the local folder **"downloaded_images"**. Each echo image should be 2376 x 1344 pixels in landscape format.
@@ -127,14 +126,14 @@ Building your own codex is a creative process, and the EchoAI Matrix is a tool t
 **Scene.csv** is a list of scenes that will be used to generate your echo. You can change the default scene or add as many scenes as you want.
 > **WARNING:** ![scene.jpg](readme_img%2Fscene.jpg) Since this is a csv format, do not include any commas in your scene name, and try to avoid punctuation. Do not change the first row of your file; it should be named 'Scene Description' as it is case-sensitive.
 
-Your second file, **Structure.csv,** represents a matrix of attributes that will be used to create your scenes. A matrix is composed of eight categories of attributes. By default, you will have nine values per category. These will be randomly combined with your scenes to explore different visual possibilities. A codex with the default matrix will hold 387 million possibilities.
+Your second file, **Structure.csv,** represents a matrix of attributes that will be used to create your scenes. A matrix is composed of eight categories of attributes. By default, you will have various values per category. These will be randomly combined with your scenes to explore different visual possibilities. A codex with the default matrix will hold million possibilities.
 > **WARNING:** ![structure.jpg](readme_img%2Fstructure.jpg) Similar to Scene.csv, you must not alter the first row and should not include any commas or punctuation when replacing or adding new attributes. You cannot change the number of categories or alter their names.
 > 
->While you can add as many new attributes as you like, you must keep the same number of attributes per category.
+>While you can add as many new attributes as you like, if you want any attributes before the prompt, one column need to be name Prefix. Since it's a CSV format, if a column has less value, fill the empty row with empty "" value.
 
-To fully explore the possibilities of your codex, you should increase your EchoAI's multithreading capacity. This will be done in two locations. The first one is in your [config.py](config.py) file. Find the line `MAX_CONCURRENT_JOBS = 1` and change its value to 3. Note that 5 is the maximum value, but it may be less stable. This value manages how many echo images are being generated at the same time. Each echo will still have its own unique attributes combination.
+To fully explore the possibilities of your echoAi capacity and help manage all the possible variable in your Config.py file, a wizard will help you define what variable you wish to run for this session.
 
-The second location is in your [leonardo.json](config-files%2Fleonardo.json) file, located in your **'config-files/'** folder. Find the line `"NUM_IMAGES": 1`, and set its value to 2. This value manages how many variations (seeds) each echo should have. With the value 2, each unique echo attributes combination will always return two alternative image results. The maximum value is 4.
+If you wish to geneate more variaition of the same prompt, go to the [leonardo.json](config-files%2Fleonardo.json) file, located in your **'config-files/'** folder. Find the line `"NUM_IMAGES": 1`, and set its value to 2. The maximum value is 4.
 
 Finally, the last step is to define how many echo cycles you wish to run. A cycle is the full production of all your scenes. By default, the value is set to 1. You can change this value in your [config.py](config.py) file. Find the line `NUM_ITERATIONS = 1` and change the value to the number of cycles you wish to run. There is no max value.
 
@@ -142,7 +141,7 @@ Finally, the last step is to define how many echo cycles you wish to run. A cycl
 > - **A Codex of 12 scenes** | scene.csv
 > - **With 9 attributes per category** | structure.csv
 > - **Set for 2 cycles** | NUM_ITERATIONS = 2
-> - **With 3 concurrent echoes** | MAX_CONCURRENT_JOBS = 3
+> - **With 3 concurrent echoes** | MAX_CONCURRENT_JOBS = 5
 > - **And 2 variations per echo** | "NUM_IMAGES": 2
 >  
 > Will generate around 35 images of **2376 × 1344** pixels in about 5 minutes, or the equivalent of 1 HD image every 8 seconds. Since they are batched and multi-threaded, they will show in batch updates in your downloaded_images folder.
@@ -167,28 +166,16 @@ Use this process to replace attributes you do not like or to reduce the number o
 ### Locking Your Style
 After enough exploration, you may find the exact style you like. It is up to you whether you wish to use your codex or lock your style before going into conversation mode. If you want to lock a specific style, the steps are very simple.
 
-The echo attributes, as well as the style, are saved in the file properties. Depending on your OS, the data may be truncated when trying to read it via the file properties. Search online for an [exif viewer online website](https://jimpl.com/) and upload your image. If the comments section shows "undefined", you may want to try a different viewer.
-
-**In a text editor:**
-1. Copy the ImageDescription Echo attributes value.
-2. Copy the presetStyle value from the UserComment section.
-3. Do not include the trailing semicolon.
+The echo attributes, as well as the style, are saved in the file properties. To fetch it simply use the name of your image (ex: 0d7944a9-9a4b-47ab-920d-8966b1f96ea7_1.jpg) and invoke the following url: ws.echoai.space/jobs/info/**your-image-name** (ex: https://ws.echoai.space/jobs/info/0d7944a9-9a4b-47ab-920d-8966b1f96ea7_1.jpg)
 
 **In your [config.py](config.py) file:**
-1. Go to the **OVERRIDE SETTINGS** section.
-2. To uncomment a line, remove the `#` character and its space at the beginning of the line.
-3. Uncomment the **OVERRIDE_STYLE**.
-4. Set its value to the **presetStyle** value you copied.
-5. Uncomment the **OVERRIDE_STRING** and set its value to your echo attributes.
-6. The echo attribute had your scene description; replace the scene part with `<SCENE>`.
-7. Uncomment one **OVERRIDE_MODEL** based on your preference (Realistic versus Artistic).
+1. Go to the **SCENE** section.
+2. Fill out the prompt structure
+3. Put **<SCENE>** where you want the scene line from your CSV to be added
+4. You can also define the **STYLE=** and the **NEGATIVE=** value to use
 
-You are now ready to run your codex through another cycle.
 
-> Your configuration file with an **OVERRIDE** setting should look like this:
-> ![override.jpg](readme_img%2Foverride.jpg)
- 
-> EXIF used as an override style setting
+> Reference image used to lock the style
 > ![exif.jpg](readme_img%2Fexif.jpg)
 
 > Demo output of an override codex on a 12.9.2.3.2 setting.
@@ -199,77 +186,46 @@ You are now ready to run your codex through another cycle.
 
 ![Screenshot of EchoAI](readme_img/cycle39.jpg)
 
-Now that you have your codex fine-tuned (either in open mode or override mode), it is time to explore the creative universe within your brainstorming meetings. Currently, EchoAI only supports text transcripts, but I hope to soon ship an audio input that can run in real-time during your brainstorming or creative conversations.
+Now that you have your codex fine-tuned (either in open mode or override mode), it is time to explore the creative universe within your brainstorming meetings. Currently, EchoAI only supports .wav audio file, but I hope to soon ship a realtime audio input for mac and pc.
 
-EchoAI ships with H.P. Lovecraft's 'Through the Gates of the Silver Key' as a demo transcript. Go to `config-files/conversation-capture.txt` to load your own transcript using a text editor. You must have a minimum of 20 sentences in your transcript.
-
-> Running your codex on a conversation transcript is very simple.
-> - Open your **config.py** file in a text editor.
-> - Look for `USE_TRIGGER_FILE = False` and change it to `True`.
-> - Warning: `True` and `False` in Python are **case-sensitive**.
-> 
-> You then **must set your main theme** that best describes the universe of your brainstorm. The value should be one sentence with no punctuation, and it is advised to start it with 'in the...'
-> - `config.py / UNIVERSE = "in the dark world of lovecraft"`
-> 
-> Conversation mode does not support multi-threading (yet). We recommend using the following settings for your first conversation run:
-> - `config.py / NUM_ITERATIONS = 1`
-> - `config.py / MAX_CONCURRENT_JOBS = 1`
-> - `leonardo.json / "NUM_IMAGES": 1`
-
-<br/>**EchoAI** will run your conversation in a two-pass filter. 
-
-It will first take 5 successive sentences from a random location in your transcript. The following is a **demo output** of an override codex in conversation mode using H.P. Lovecraft's '**Through the Gates of the Silver Key**'.
+Your **.wav** file can be in any language and set in the folder **/input**
 
 ### Echo Conversation Example #1
 > **1. TRANSCRIPT EXCERPT**
 > 
-> After an impressive pause, the waves continued, saying that what the denizens of few-dimensioned zones call change is merely a function of their consciousness, which views the external world from various cosmic angles. As the shapes produced by the cutting of a cone seem to vary with the angles of cutting—being circle, ellipse, parabola, or hyperbola according to that angle, yet without any change in the cone itself—so do the local aspects of an unchanged and endless reality seem to change with the cosmic angle of regarding. To this variety of angles of consciousness, the feeble beings of the inner worlds are slaves, since with rare exceptions they cannot learn to control them. Only a few students of forbidden things have gained inklings of this control, and have thereby conquered time and change.
+> Quand Randolph Carter avait trente ans, il perdit la clé de la porte des rêves. *(English: When Adolf Carter was 30, he lost the key to the door of dreams.)*
 >
-> **2. FIRST PASS OUTPUT**
+> **2. CHAT GPT DEFINE THE SCENE**
 > 
-> This text speaks of the idea that what is seen as change in our limited world is merely a function of viewing the infinite reality from different angles. One can learn to control these angles, although this knowledge is rare and usually forbidden.
+> The primary conflict is Adolf Carter's struggle with the loss of his youthful freedom and sense of adventure as he ages.
+> **Aesthetic:** Fantasy, Dream-like, Nostalgic
 >
-> **3. SECOND PASS OUTPUT**
+> **3. THEN TRANSFORM IT INTO A PROMPT**
 > 
-> Mystical hooded figure with forbidden knowledge, iridescent gemstones embedded in sleeves, in the dark world of Lovecraft.
+> The scene captures a moment of profound emotional depth as Adolf Carter stands in a dimly lit, sparsely furnished room, embodying the essence of profound sadness and contemplation. This setting, with its minimalist aesthetic and soft, lowkey lighting, emphasizes the emotional weight of Carters realization of a significant loss the metaphorical key to the door of dreams, symbolizing his fading ability to escape into fantastical adventures. The closeup camera focus on Carters face, marked by deep contemplation and the realization of loss, alongside the dreamlike, nostalgic atmosphere, underscores themes of aging, loss, escape, adventure, and nostalgia.
 >
 > **4. ECHO IMAGE RESULT**
-> ![silver_key_echo_01.jpg](readme_img%2Fsilver_key_echo_01.jpg)
-> ![silver_key_echo_02.jpg](readme_img%2Fsilver_key_echo_02.jpg)
+> ![silver_key_echo_05.jpg](readme_img%2Fsilver_key_echo_05.jpg)
 
 ### Echo Conversation Example #2
 > **1. TRANSCRIPT EXCERPT**
 > 
-> It was as if he floated in a torrid, rose-tinctured sea; a sea of drugged wine whose waves broke foaming against shores of brazen fire. A great fear clutched him as he half saw that vast expanse of surging sea lapping against its far-off coast. But the moment of silence was broken—the surgings were speaking to him in a language that was not of physical sound or articulate words. “The man of Truth is beyond good and evil,” intoned a voice that was not a voice.
+> Avant cela, il compensait la prosaïcité de la vie par des excursions nocturnes vers d'étranges et anciennes cités au-delà de l'espace. *(English: Prior to that time he had made up for the prosiness of life by nightly excursions to strange and ancient cities beyond space.)*
 >
-> **2. FIRST PASS OUTPUT**
+> **2. CHAT GPT DEFINE THE SCENE**
 > 
-> The text described a surreal scene of an unknown, rosy sea with waves of drugged wine breaking against shores of fire. A voice not heard with mortal ears spoke of a man who has travelled beyond the realms of good and evil.
+> Visual scene focusing on a solitary figure navigating through a snowy landscape under the aurora borealis. The figure should be cloaked, with a scarf partially covering their face. The environment should be vast and open.
+> **Aesthetic:** Fantastical, Dreamlike, Ancient, Exotic
 >
-> **3. SECOND PASS OUTPUT**
+> **3. THEN TRANSFORM IT INTO A PROMPT**
 > 
-> Raging seas of fiery wine cascading on golden shores in the dark world of Lovecraft.
->
+> A solitary figure cloaked and scarfed, with only their determined and wondering eyes visible, treks through a vast snowy landscape under the mesmerizing glow of the aurora borealis. The figures eyes, reflecting the auroras colors, hint at a deep yearning for adventure and escape, embodying themes of loss, aging, and the clash between fantasy and reality. This scene, captured through a wide angle lens from a low angle, emphasizes the vastness of the landscape and the figures solitude, enhancing the dreamlike, ancient, and exotic aesthetic of the moment.
+> 
 > **4. ECHO IMAGE RESULT**
-> ![silver_key_echo_03.jpg](readme_img%2Fsilver_key_echo_03.jpg)
-> ![silver_key_echo_04.jpg](readme_img%2Fsilver_key_echo_04.jpg)
+> ![silver_key_echo_06.jpg](readme_img%2Fsilver_key_echo_06.jpg)
 
 ### <br> Refining First and Second Passes
-If you wish to control the behavior of the first and second passes, open the **trigger.py** file in a text editor and look for the **FIRST PASS SETTINGS** and **SECOND PASS SETTINGS** section. The prompt tag represents the instructions given to ChatGPT to transform our original text into a scene that will be rendered in our Echo pipeline (using our attributes or override setting).
-
----
-## Mode 4 Operation - Immersion
-
-![Screenshot of EchoAI](readme_img/cycle40.jpg)
-
-Running EchoAI in Immersion mode is a way to display real-time fullscreen versions of echo images as they arrive. If you want to broadcast your Echo on a stream, on a monitor, or as a webcam feed, you can capture the feed using OBS / Streamlabs OBS and set it as a Virtual Webcam (for Slack Huddle, Microsoft Teams Meeting, or Google Hangout), set it as a Twitch stream, or as a YouTube livestream.
-> Immersion mode can only be run using a single-thread setting with one image per thread. You can change these settings with your text editor.
-> - `config.py / MAX_CONCURRENT_JOBS = 1`
-> - `leonardo.json / "NUM_IMAGES": 1`
->
-> Once you have set the required settings, you can activate Immersion mode in the `config.py` file.
-> - Look for `SLIDESHOW_ENABLED = False` and change it to `True`.
-> - Warning: `True` and `False` in Python are **case-sensitive**.
+If you wish to control the behavior of the various ChatGPT pass to transform your voice into image, open the **scene.py** in the **preprocess/** folder.
 
 ---
 ## Gathering of Minds - EchoAI Collective

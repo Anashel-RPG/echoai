@@ -4,86 +4,80 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ac0d8375-81f4-4d3d-b0cc-9900f9900d94" name="Changes" comment="Update Git Ignore">
-      <change beforePath="$PROJECT_DIR$/.idea/EchoAI.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/EchoAI.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
+    <list default="true" id="0f6a8c69-5d65-4287-92a1-167033b73371" name="Changes" comment="Update Git Ignore with Idea">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/EchoAI.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config-files/conversation-capture.txt" beforeDir="false" afterPath="$PROJECT_DIR$/config-files/conversation-capture.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config-files/leonardo.json" beforeDir="false" afterPath="$PROJECT_DIR$/config-files/leonardo.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config-files/scene.csv" beforeDir="false" afterPath="$PROJECT_DIR$/config-files/scene.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config-files/structure.csv" beforeDir="false" afterPath="$PROJECT_DIR$/config-files/structure.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/config.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/downloaded_images/sample-01.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/file_reader.py" beforeDir="false" afterPath="$PROJECT_DIR$/file_reader.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/image_downloader.py" beforeDir="false" afterPath="$PROJECT_DIR$/image_downloader.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/job_data_store.py" beforeDir="false" afterPath="$PROJECT_DIR$/job_data_store.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/job_manager.py" beforeDir="false" afterPath="$PROJECT_DIR$/job_manager.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/job_payload_creator.py" beforeDir="false" afterPath="$PROJECT_DIR$/job_payload_creator.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ranking.py" beforeDir="false" afterPath="$PROJECT_DIR$/ranking.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ranking_bad/sample-bad.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ranking_good/sample-good.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ranking_mac.sh" beforeDir="false" afterPath="$PROJECT_DIR$/ranking_mac.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ranking_windows.bat" beforeDir="false" afterPath="$PROJECT_DIR$/ranking_windows.bat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/start_mac.sh" beforeDir="false" afterPath="$PROJECT_DIR$/start_mac.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/start_windows.bat" beforeDir="false" afterPath="$PROJECT_DIR$/start_windows.bat" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ChangesViewManager" show_ignored="true">
-    <option name="groupingKeys">
-      <option value="directory" />
-    </option>
-  </component>
   <component name="Git.Settings">
-    <option name="PUSH_TAGS">
-      <GitPushTagMode>
-        <option name="argument" value="--tags" />
-        <option name="title" value="All" />
-      </GitPushTagMode>
-    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-  </component>
-  <component name="GitHubPullRequestSearchHistory">{
-  &quot;lastFilter&quot;: {
-    &quot;state&quot;: &quot;OPEN&quot;,
-    &quot;assignee&quot;: &quot;Anashel-RPG&quot;
-  }
-}</component>
-  <component name="GithubPullRequestsUISettings">
-    <option name="selectedUrlAndAccountId">
-      <UrlAndAccount>
-        <option name="accountId" value="a7778055-1820-47f5-87af-6ac212f3bda3" />
-        <option name="url" value="https://github.com/Anashel-RPG/echoai.git" />
-      </UrlAndAccount>
-    </option>
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectColorInfo">{
-  &quot;associatedIndex&quot;: 8
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 1
 }</component>
-  <component name="ProjectId" id="2ZKHRCMXQRTKOKrCnTLinxlMa3M" />
+  <component name="ProjectId" id="2VVGKycNU8p6IyYl4fimpQmytRT" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
   </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
-    <option name="openDirectoriesWithSingleClick" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "ASKED_MARK_IGNORED_FILES_AS_EXCLUDED": "true",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "main",
-    "last_opened_file_path": "C:/Users/adoyo/Alice and Smith Dropbox/Shared Tools/Python-Project/EchoAI",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;Python.Generate.executor&quot;: &quot;Run&quot;,
+    &quot;Python.Generating.executor&quot;: &quot;Run&quot;,
+    &quot;Python.Ranking.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/andreadoyon/Alice and Smith Dropbox/Shared Tools/Python-Project/echoai&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;project.propVCSSupport.DirectoryMappings&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
-  <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/readme_img" />
-    </key>
-  </component>
-  <component name="RunManager">
-    <configuration name="Generate" type="PythonConfigurationType" factoryName="Python">
-      <module name="EchoAI" />
+}</component>
+  <component name="RunManager" selected="Python.Generating">
+    <configuration name="Generating" type="PythonConfigurationType" factoryName="Python">
+      <module name="Python-Project" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -91,6 +85,7 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
+      <option name="SDK_NAME" value="Python 3.12" />
       <option name="WORKING_DIRECTORY" value="" />
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
@@ -105,72 +100,86 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="Ranking" type="PythonConfigurationType" factoryName="Python">
+      <module name="Python-Project" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="SDK_NAME" value="Python 3.12" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/ranking.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Python.Generating" />
+      <item itemvalue="Python.Ranking" />
+    </list>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-python-sdk-d68999036c7f-b11f5e8da5ad-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-233.14475.56" />
+        <option value="bundled-python-sdk-5a2391486177-2887949eec09-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-233.13763.11" />
       </set>
     </attachedChunks>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="ac0d8375-81f4-4d3d-b0cc-9900f9900d94" name="Changes" comment="" />
-      <created>1702163839422</created>
+      <changelist id="0f6a8c69-5d65-4287-92a1-167033b73371" name="Changes" comment="" />
+      <created>1694913775191</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1702163839422</updated>
-      <workItem from="1702163840538" duration="8347000" />
-      <workItem from="1702205969404" duration="22934000" />
-      <workItem from="1702230355753" duration="65000" />
-      <workItem from="1702230576749" duration="2822000" />
-      <workItem from="1702236373575" duration="1088000" />
-      <workItem from="1710093286548" duration="172000" />
+      <updated>1694913775191</updated>
+      <workItem from="1694913776340" duration="541000" />
+      <workItem from="1694914376406" duration="81000" />
+      <workItem from="1702565670345" duration="7000" />
+      <workItem from="1705714902011" duration="24000" />
+      <workItem from="1710116480047" duration="610000" />
+      <workItem from="1710603898068" duration="3287000" />
+      <workItem from="1710607814596" duration="56000" />
     </task>
-    <task id="LOCAL-00001" summary="Version Alpha 0.1">
-      <option name="closed" value="true" />
-      <created>1702230707842</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1702230707842</updated>
-    </task>
-    <task id="LOCAL-00002" summary="Version Alpha 0.1">
-      <option name="closed" value="true" />
-      <created>1702230799379</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1702230799379</updated>
-    </task>
-    <task id="LOCAL-00003" summary="Windows BAT Fix for dependencies and typo in the readme.">
-      <option name="closed" value="true" />
-      <created>1702236549671</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1702236549671</updated>
-    </task>
-    <task id="LOCAL-00004" summary="Update Git Ignore">
-      <option name="closed" value="true" />
-      <created>1710093443684</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1710093443684</updated>
-    </task>
-    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="VcsManagerConfiguration">
-    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Version Alpha 0.1" />
-    <MESSAGE value="Windows BAT Fix for dependencies and typo in the readme." />
-    <MESSAGE value="Update Git Ignore" />
-    <option name="LAST_COMMIT_MESSAGE" value="Update Git Ignore" />
+    <ignored-roots>
+      <path value="$PROJECT_DIR$/worker-hello-world" />
+    </ignored-roots>
+    <MESSAGE value="Update Git Ignore with Idea" />
+    <option name="LAST_COMMIT_MESSAGE" value="Update Git Ignore with Idea" />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/echoai$Ranking.coverage" NAME="Ranking Coverage Results" MODIFIED="1710100918091" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/echoai$Generate.coverage" NAME="Generate Coverage Results" MODIFIED="1710100974325" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/audio_py$Generating.coverage" NAME="Generating Coverage Results" MODIFIED="1710604832629" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/Python_Project$index.coverage" NAME="index Coverage Results" MODIFIED="1694913972904" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/python-worker-hello-world" />
+    <SUITE FILE_PATH="coverage/audio_py$Ranking.coverage" NAME="Ranking Coverage Results" MODIFIED="1710604093009" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
   </component>
 </project>

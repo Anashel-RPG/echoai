@@ -8,7 +8,6 @@ logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(
 
 # Global dictionary to store job data
 job_data_store = {}
-logging.info(f"Job data store reset")
 
 def store_job_data(job_id, prompt):
     global job_data_store

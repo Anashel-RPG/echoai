@@ -28,6 +28,11 @@ pip install requests
 pip install scikit-learn
 pip install openai
 pip install piexif
+pip install colorama
+pip install numpy
+pip install sounddevice
+pip install wavio
+pip install soundfile
 
 # Check if the last command was successful
 if [ $? -ne 0 ]; then

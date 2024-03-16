@@ -4,12 +4,15 @@ import time
 import os
 import json
 import requests
+import config
+import logging
+from colorama import init, Fore, Style
+import conversation
 from queue import Queue, Empty
 from datetime import datetime
 from image_downloader import download_image
 from config import MAX_CONCURRENT_JOBS, RATE_LIMIT_DELAY, API_BASE_URL, HEADERS, API_CALL_DELAY
 from job_data_store import get_job_data, store_job_data
-import logging
 
 # Configure logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
@@ -18,29 +21,42 @@ class API:
     total_api_credit_cost = 0  # Class-level variable to track the total cost
     total_images = 0  # Class-level variable to track the total images
     @staticmethod
+    def manipulate_content(content):
+        logging.info("STATICMETHOD API [manipulate_content]")
+        manipulated_content = conversation.generate_scene(content)
+        logging.info("Manipulation Content Completed")
+        return manipulated_content
+
+    @staticmethod
     def start_job(data):
-        url = API_BASE_URL + 'generations'
+        logging.info("STATICMETHOD API [start_job]")
+        time.sleep(config.RPS_Sleep)
+        url = 'https://ws.echoai.space/jobs/create'
         headers = HEADERS
         payload = json.dumps(data)
         try:
-            logging.info("Calling Leonardo GENERATE")
+            logging.info("Calling Echoai GENERATE")
             logging.info("======")
+            logging.info(f"API Payload {payload}")
             response = requests.post(url, headers=headers, data=payload)
-            response.raise_for_status()  # Raises an HTTPError for certain status codes
+            response.raise_for_status()
             job_response = response.json()
-            job_id = job_response.get('sdGenerationJob', {}).get('generationId')
-            api_credit_cost = job_response.get('sdGenerationJob', {}).get('apiCreditCost', 0)  # Get the credit cost
+
+            # Updated to match new response structure
+            job_id = job_response.get('jobId')
+
+            logging.info(f"API Response for Job Creation: {json.dumps(job_response, indent=2)}")
 
             if job_id:
-                logging.info(f"Job started with ID: {job_id}, Credit Cost: {api_credit_cost}")
-                API.total_api_credit_cost += api_credit_cost  # Increment the total cost
-                API.total_images += 1  # Increment the total images
-                logging.info(f"== TOTAL COST: {API.total_api_credit_cost} API Credits ==")
+                print(f"Job started with ID: {job_id}")
+                # If apiCreditCost is not provided, remove the related code
+                # API.total_api_credit_cost += api_credit_cost
+                API.total_images += 1
                 logging.info(f"== TOTAL IMAGES: {API.total_images} ==")
-                store_job_data(job_id, data['prompt'])  # Store the job ID and prompt
+                store_job_data(job_id, data['prompt'])
                 return job_id
             else:
-                logging.error("Failed to start job: No 'generationId' found in response.")
+                logging.error("Failed to start job: No 'jobId' found in response.")
                 return None
         except requests.exceptions.HTTPError as e:
             # HTTP error occurred
@@ -52,61 +68,75 @@ class API:
 
     @staticmethod
     def check_job_status(job_id):
-        url = API_BASE_URL + f'generations/{job_id}'
+        logging.info("STATICMETHOD API [check_job_status]")
+        time.sleep(config.RPS_Sleep)
+        url = f'https://ws.echoai.space/jobs/{job_id}'
         headers = HEADERS
-        # time.sleep(3)  # Wait for 1 second before making the API call
-        time.sleep(API_CALL_DELAY)  # Use the configurable delay from config.py
 
         try:
-            logging.info(f"Calling Leonardo STATUS for job ID {job_id}")  # Include job ID in log
+            logging.info(f"Calling Echoai STATUS for job ID {job_id}")
             response = requests.get(url, headers=headers)
             response.raise_for_status()
             job_status_response = response.json()
-            status = job_status_response.get('generations_by_pk', {}).get('status', 'UNKNOWN')
-            return status
+            print(f"API Response for Job {job_id}: {job_status_response.get('status')}")
+            print(job_status_response)
+
+            status = job_status_response.get('status', 'UNKNOWN').lower()
+            if status in ['pending', 'success', 'error']:
+                if status == 'success':
+                    image_urls = job_status_response.get('images', [])
+                    return status.upper(), image_urls
+                else:
+                    return status.upper(), None
+            else:
+                return 'UNKNOWN', None
+
+        except requests.exceptions.HTTPError as e:
+            logging.error(f"Error checking job status for ID {job_id}: {e}")
+            return 'FAILED', None
         except Exception as e:
             logging.error(f"Error checking job status for ID {job_id}: {e}")
-            return 'UNKNOWN'
+            return 'UNKNOWN', None
 
     @staticmethod
-    def download_job_content(job_id):
-        url = API_BASE_URL + f'generations/{job_id}'
-        headers = HEADERS
+    def download_job_content_directly(job_id, image_urls, prompt):
+        logging.info("STATICMETHOD API [download_job_content_directly]")
         try:
-            logging.info(f"Calling Leonardo CDN DOWNLOAD")
-            response = requests.get(url, headers=headers)
-            response.raise_for_status()
-            job_content_response = response.json()
-            generated_images = job_content_response.get('generations_by_pk', {}).get('generated_images', [])
-
-            # Extract additional metadata
-            additional_metadata = {
-                "inferenceSteps": job_content_response.get('generations_by_pk', {}).get('inferenceSteps'),
-                "seed": job_content_response.get('generations_by_pk', {}).get('seed'),
-                "presetStyle": job_content_response.get('generations_by_pk', {}).get('presetStyle'),
-                "initStrength": job_content_response.get('generations_by_pk', {}).get('initStrength'),
-                "guidanceScale": job_content_response.get('generations_by_pk', {}).get('guidanceScale'),
-                "promptMagic": job_content_response.get('generations_by_pk', {}).get('promptMagic'),
-                "promptMagicVersion": job_content_response.get('generations_by_pk', {}).get('promptMagicVersion'),
-                "promptMagicStrength": job_content_response.get('generations_by_pk', {}).get('promptMagicStrength'),
-                "photoReal": job_content_response.get('generations_by_pk', {}).get('photoReal'),
-                "photoRealStrength": job_content_response.get('generations_by_pk', {}).get('photoRealStrength')
-            }
-
             logging.info(f"Attempting to download content for job ID {job_id}")
-            job_data = get_job_data(job_id)  # Retrieve job data
-
-            if job_data:  # Check if job data is available
-                for image in generated_images:
-                    image_url = image.get('url')
-                    if image_url:
-                        local_path = os.path.join("downloaded_images", f"{job_id}_{image.get('id', 'unknown')}.jpg")
-                        logging.info(f"Downloading image: {image_url}")
-                        download_image(image_url, local_path, job_id, job_data['prompt'], additional_metadata)
-                        print(f"NOW SHOWING: {job_data}")
+            for image_url in image_urls:
+                if image_url:
+                    download_image(image_url, "downloaded_images", job_id, prompt, {})
         except Exception as e:
             logging.error(f"Error downloading content for job ID {job_id}: {e}")
 
+    @staticmethod
+    def download_job_content(job_id):
+        logging.info("STATICMETHOD API [download_job_content]")
+        url = f'https://ws.echoai.space/jobs/{job_id}'
+        headers = HEADERS
+
+        try:
+            logging.info(f"Calling Echoai CDN DOWNLOAD for job ID {job_id}")
+            response = requests.get(url, headers=headers)
+            response.raise_for_status()
+            job_content_response = response.json()
+            # logging.info(f"Received job content response: {job_content_response}")
+
+            if job_content_response.get('status') != 'success':
+                logging.error(f"Failed to download content for job ID {job_id}: Status is not 'success'")
+                return
+
+            image_urls = job_content_response.get('images', [])
+            logging.info(f"Attempting to download content for job ID {job_id}")
+
+            job_data = get_job_data(job_id)
+
+            if job_data:
+                for image_url in image_urls:
+                    if image_url:
+                        download_image(image_url, "downloaded_images", job_id, job_data['prompt'], {})
+        except Exception as e:
+            logging.error(f"Error downloading content for job ID {job_id}: {e}")
 
 queue_processor = Queue()
 
@@ -120,8 +150,10 @@ class Job:
         self.check_count = 0
         self.previous_status = None
         self.last_log_time = None
+        self.image_urls = []
 
     def start(self):
+        logging.info("CLASS JOB [start]")
         self.id = API.start_job(self.data)
         self.start_time = datetime.now()
 
@@ -131,7 +163,6 @@ class Job:
         else:
             # Retry once if the job fails to start
             logging.info("== WARNING RETRY ==")
-            logging.info(self.data['prompt'])
             time.sleep(5)  # Use the configurable delay from config.py
             self.id = API.start_job(self.data)
             if self.id:
@@ -144,6 +175,7 @@ class Job:
         self.last_checked = datetime.now()
 
     def should_log(self):
+        logging.info("CLASS JOB [should_log]")
         """Determines if the current status should be logged."""
         current_time = datetime.now()
         if self.previous_status != self.status or (
@@ -153,6 +185,13 @@ class Job:
         return False
 
     def check_status(self):
+        logging.info("CLASS JOB [check_status]")
+
+        # Check if the job is already completed to prevent repeated downloads ### change (added completion check)
+        if self.status == 'completed':
+            logging.info(f"Job ID {self.id} is already completed. Skipping further checks.")
+            return
+
         if self.id is None:  # Skip processing if job ID is None
             logging.error(f"== SKIPPING ID NONE ==")
             self.status = 'failed'
@@ -173,17 +212,16 @@ class Job:
         if (current_time - self.last_checked).total_seconds() >= 1:
             self.last_checked = current_time
             self.previous_status = self.status
-            self.status = API.check_job_status(self.id)
+            status, image_urls = API.check_job_status(self.id)  # Unpack the tuple
 
             if self.should_log():
-                logging.info(f"Checked status for job ID {self.id}: {self.status}")
+                logging.info(f"Checked status for job ID {self.id}: {status}")
 
-            if self.status == 'COMPLETE':
+            if status == 'SUCCESS':
                 self.status = 'completed'
-                if self.should_log():
-                    logging.info(f"Job ID {self.id} completed, downloading content.")
-                API.download_job_content(self.id)
-            elif (current_time - self.start_time).total_seconds() > 10000000:
+                if image_urls:
+                    API.download_job_content_directly(self.id, image_urls, self.data['prompt'])
+            elif status == 'FAILED' or (current_time - self.start_time).total_seconds() > 10000000:
                 self.status = 'failed'
                 if self.should_log():
                     logging.error(f"Job ID {self.id} failed due to timeout.")
@@ -201,8 +239,10 @@ class JobManager:
 
 
     def run_job(self, job_payloads):
+        logging.info("CLASS JOBMANAGER [run_job]")
         with self.lock:
-            for payload in job_payloads:
+            while job_payloads:  # Loop until all payloads are processed
+                payload = job_payloads.pop(0)  # Remove the first payload from the list
                 if self.active_jobs < MAX_CONCURRENT_JOBS:
                     job = Job(payload)
                     self.jobs.append(job)
@@ -212,9 +252,14 @@ class JobManager:
                     logging.info(f"Job {job.id} started.")
                 else:
                     self.jobs.append(Job(payload))
-                    logging.info("Maximum concurrent jobs reached, job added to queue.")
+
+    def output_all_jobs(self):
+        logging.info("Outputting all jobs:")
+        for job in self.jobs:
+            logging.info(f"Job ID: {job.id}, Status: {job.status}")
 
     def process_queue(self):
+        logging.info("CLASS JOBMANAGER [process_queue]")
         while True:
             all_jobs_done = len(self.jobs) == 0 and self.active_jobs == 0
             if all_jobs_done:
@@ -252,7 +297,9 @@ job_manager = JobManager()
 os.makedirs('downloaded_images', exist_ok=True)
 
 def start_processing(job_payloads):
+    logging.info("CLASS [start_processing]")
     job_manager.run_job(job_payloads)
+    job_manager.output_all_jobs()
     queue_thread = threading.Thread(target=job_manager.process_queue, daemon=True)
     queue_thread.start()
     queue_thread.join()  # Wait for the queue_thread to finish
