@@ -1,4 +1,5 @@
 # config.py
+# Version 0.0.2
 from datetime import timedelta
 import logging
 import json
