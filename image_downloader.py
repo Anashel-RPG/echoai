@@ -5,14 +5,13 @@ import os
 import config
 import logging
 import requests
-from colorama import init, Fore, Style
 
 # Configure logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(essage)s')
 
 def download_image(image_url, local_dir, job_id, prompt, additional_metadata):
 
-    logging.info(f"Initiating download: URL {image_url}, Local Path {local_dir}, Job ID {job_id}, Prompt {prompt[:30]}...")
+    print(f"Initiating download: URL {image_url}, Local Path {local_dir}, Job ID {job_id}, Prompt {prompt[:30]}...")
 
     file_name = image_url.split('/')[-1]
     local_path = os.path.join(local_dir, file_name)
@@ -69,10 +68,9 @@ def download_image(image_url, local_dir, job_id, prompt, additional_metadata):
             raise ValueError("Unsupported image format")
 
         # print(f"Image downloaded successfully and saved to {local_path}")
-        print(Fore.BLUE + Style.BRIGHT + "")
         print(f"Image https://cdn.echoai.space/{file_name} downloaded successfully")
         print(f"Image metadata: https://ws.echoai.space/jobs/info/{file_name}")
-        print(Fore.LIGHTBLACK_EX + "---")
+        print("---")
 
         # OPTIONAL : Save job information as text file if METAINFO is True
         if config.METAINFO:

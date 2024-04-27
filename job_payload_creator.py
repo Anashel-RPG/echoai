@@ -9,14 +9,14 @@ import re
 import os
 
 # Configure logging
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+logging.basicConfig(level=print, format='%(asctime)s - %(levelname)s - %(message)s')
 
 # Possible RENDER_MODE values
 render_modes = ["Leonardo","Civitai","Prodia","Midjourney","Dalle"]
 # render_modes = ["Civitai","Leonardo","Prodia"]
 
 def create_job_payloads(structure_params, scene_descriptions, num_images_to_generate, api_type='default'):
-    logging.info("Creating job payloads...")
+    print("Creating job payloads...")
     job_payloads, prompts, scene_index = [], [], 0  # Initialize lists and scene index in one line
 
     scene_descriptions_list = scene_descriptions['Scene Description']
@@ -26,7 +26,7 @@ def create_job_payloads(structure_params, scene_descriptions, num_images_to_gene
 
     # SECTION 1
     try:
-        logging.info(f"Loop started for: {num_images_to_generate}")
+        print(f"Loop started for: {num_images_to_generate}")
 
         # SECTION 1.1 Looping to generate all image required
         for index in range(num_images_to_generate):
@@ -45,7 +45,8 @@ def create_job_payloads(structure_params, scene_descriptions, num_images_to_gene
                 model_id_configs = {
                     "Prodia": config.PRODIA_MODEL_IDS,
                     "Civitai": config.CIVITAI_MODEL_IDS,
-                    "Leonardo": config.LEONARDO_MODEL_IDS
+                    "Leonardo": config.LEONARDO_MODEL_IDS,
+                    "SeeArt": config.SEEART_MODEL_IDS
                 }
                 model_ids = json.loads(model_id_configs.get(config.RENDER_MODE, config.LEONARDO_MODEL_IDS))
 
@@ -70,7 +71,9 @@ def create_job_payloads(structure_params, scene_descriptions, num_images_to_gene
                         "Leonardo": config.LEONARDO_RATE,
                         "Prodia": config.PRODIA_RATE,
                         "Mdijourney": config.MIDJOURNEY_RATE,
-                        "Dalle": config.DALLE_RATE
+                        "Dalle": config.DALLE_RATE,
+                        "SeeArt": config.SEEART_RATE,
+                        "sd3": config.SD3_RATE
                     }.get(config.RENDER_MODE, 0.5)
 
                     # Safely get the Prefix if the key exists, otherwise default to an empty list
@@ -81,11 +84,15 @@ def create_job_payloads(structure_params, scene_descriptions, num_images_to_gene
                     # Add the environment to the prompt as a prefix
                     prompt = f"{environment + ' ' if environment else ''}{config.FORCE_UNIVERSE + ' ' if config.FORCE_UNIVERSE else ''}{scene}"
 
+                    # Assuming structure_params and probabilities_value are defined somewhere above
+
                     # Add all the other key to the prompt
                     selected_options = {key: random.choice(value) for key, value in structure_params.items() if
-                                        key != 'Prefix'}
-                    prompt += ''.join(f", {value}" for key, value in selected_options.items() if
-                                      random.random() < probabilities_value)
+                                        key != 'Prefix' and value}
+
+                    if selected_options:
+                        prompt += ''.join(f", {value}" for key, value in selected_options.items() if
+                                          random.random() < probabilities_value)
 
                     # Randomly select a style
                     styles = json.loads(config.PRODIA_STYLES if config.RENDER_MODE == "Prodia" else config.LEONARDO_STYLES)
@@ -101,10 +108,13 @@ def create_job_payloads(structure_params, scene_descriptions, num_images_to_gene
                 # Trim the prompt to 850 characters in case all our new additions have made it too long
                 trimmed_prompt = prompt[:850]
 
-                # Now create the payload with the trimmed prompt
-                payload = create_api_specific_payload(model_id, trimmed_prompt, random_style)
+                # Clean any artefacts
+                cleaned_prompt = ", ".join(filter(None, (part.strip() for part in trimmed_prompt.split(","))))
 
-                # logging.info(f"Render Mode: {config.RENDER_MODE} and loop mode {render_mode}")
+                # Now create the payload with the trimmed prompt
+                payload = create_api_specific_payload(model_id, cleaned_prompt, random_style)
+
+                # print(f"Render Mode: {config.RENDER_MODE} and loop mode {render_mode}")
                 job_payloads.append(payload)
                 # print(job_payloads)
 
@@ -113,7 +123,7 @@ def create_job_payloads(structure_params, scene_descriptions, num_images_to_gene
                     break  # Exit the render_modes loop if not in broadcast mode
 
         # End of SECTION 1.1 creation of all image
-        logging.info(f"Number of job payloads generated: {len(job_payloads)}")
+        print(f"Number of job payloads generated: {len(job_payloads)}")
 
     except Exception as e:
         logging.error(f"An error occurred while generating job payloads: {e}")
@@ -151,6 +161,37 @@ def create_api_specific_payload(model_id, prompt, style):
             "cfgScale": 4.6,
             "negativePrompt": config.NEGATIVE
         }
+    elif config.RENDER_MODE == 'sd3':
+        if IMAGE_HEIGHT > IMAGE_WIDTH:
+            aspect_ratio = "9:16"
+        else:
+            aspect_ratio = "16:9"
+
+        codex_params = {
+            "aspect_ratio": aspect_ratio,
+            "negative_prompt": config.NEGATIVE
+        }
+    elif config.RENDER_MODE == 'SeeArt':
+        if IMAGE_HEIGHT > IMAGE_WIDTH:
+            # Set specific height and width if image is taller than it is wide
+            codex_params = {
+                "category": 5,
+                "art_model_no": model_id,
+                "negative_prompt": config.NEGATIVE,
+                "height": 1344,
+                "width": 768,
+                "num": config.NUM_IMAGES
+            }
+        else:
+            # Set specific width and height if image is wider than it is tall
+            codex_params = {
+                "category": 5,
+                "art_model_no": model_id,
+                "negative_prompt": config.NEGATIVE,
+                "height": 768,
+                "width": 1344,
+                "num": config.NUM_IMAGES
+            }
     else:
         codex_params = {
             "height": IMAGE_HEIGHT,
@@ -164,6 +205,8 @@ def create_api_specific_payload(model_id, prompt, style):
             "steps": 25,
             "cfg_scale": 4.6,
             "seed": -1,
+            "photoReal": True,
+            "photoRealVersion": "v2",
             "upscale": False,
             "sampler": config.SAMPLER,
             "aspect_ratio": "portrait",
@@ -208,6 +251,16 @@ def create_api_specific_payload(model_id, prompt, style):
         service_options = {
             "provider": "civitai",
             "api_key": config.CIVITAI_TOKEN  # Assuming you have a separate token for Midjourney
+        }
+    elif config.RENDER_MODE == 'SeeArt':  # Check if the RENDER_MODE is 'SEEART'
+        service_options = {
+        "provider": "seeart",
+        "api_key": config.SEEART_TOKEN  # Assuming you have a separate token for Midjourney
+    }
+    elif config.RENDER_MODE == 'sd3':  # Check if the RENDER_MODE is 'SEEART'
+        service_options = {
+            "provider": "sd3",
+            "api_key": config.SD3_TOKEN  # Assuming you have a separate token for Midjourney
         }
     else:  # Defaults to 'Leonardo' for any api_type other than 'Prodia'
         service_options = {

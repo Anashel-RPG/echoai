@@ -57,12 +57,13 @@ def wizard():
     print(f"We will wait {config.RPS_Sleep} second{s3} between API call")
     print(f"And render {config.MAX_CONCURRENT_JOBS} scene{s4} at the same time")
 
-    wait_time(2)
+    wait_time(1)
 
 
     #### WIZARD STEP 2 : SCENE RENDER VARIABLES ####
     print(Fore.GREEN + Style.BRIGHT + "1 - Randomly combine suffix to research a style (/config-files/structure.csv)")
     print("2 - Use a set prefix and suffix (/config-files/config.py)")
+    print("3 - Use only the scene with no prefix or suffix")
     choice = input(Style.RESET_ALL + "Enter your choice (1 or 2): ")
 
     # Choice Feedbacks
@@ -90,13 +91,15 @@ def wizard():
             print("The scene will be rendered using the Creative Model")
             print("Model ID: " + config.OVERRIDE_MODEL)
         print("The render style " + config.OVERRIDE_STYLE + " will be apply to your scene")
+    elif choice == "3":
+        config.STRUCTURE_CSV_PATH = 'config-files/empty.csv'
     else:
         print("Invalid selection.")
         exit(1)
 
-    wait_time(2)
+    wait_time(1)
 
-
+    #### WIZARD STEP 3 : SCENE LANDSCAPE OR PORTRAIT MODE ####
     print(Fore.GREEN + Style.BRIGHT + "1 - Render Scene in Landscape Format (16:9)")
     print("2 - Render Scene in Portrait Format (3:4)")
     choice = input(Style.RESET_ALL + "Enter your choice (1 or 2): ")
@@ -114,12 +117,35 @@ def wizard():
         print("Invalid selection.")
         exit(1)
 
-    print(Fore.LIGHTYELLOW_EX + Style.BRIGHT + "Configuration Completed" + Style.RESET_ALL)
     if config.IMAGE_WIDTH == 768:
         print("Render Mode = " + config.RENDER_MODE + " in Portrait Format (3:4)")
     else:
         print("Render Mode = " + config.RENDER_MODE + " in Landscape Format (16:9)")
 
+    wait_time(1)
+
+    #### WIZARD STEP 4 : RENDER ENGINE ####
+    print(Fore.GREEN + Style.BRIGHT + "1 - Render using Leonardo.AI API")
+    print("2 - Render using Stable Diffusion 3 API")
+    print("3 - Use preset in config (config.py)")
+    choice = input(Style.RESET_ALL + "Enter your choice (1, 2 or 3): ")
+
+    # Choice Feedbacks
+    print(Style.RESET_ALL + "")
+    if choice == "1":
+        config.RENDER_MODE = "Leonardo"
+        print("Render Mode will be Leonardo")
+    elif choice == "2":
+        config.RENDER_MODE = "sd3"
+        print("Render Mode will be Stable Diffusion 3")
+    elif choice == "3":
+        ### No change to Render Mode
+        print("Render Mode will be " + config.RENDER_MODE + " API")
+    else:
+        print("Invalid selection.")
+        exit(1)
+
+    print(Fore.LIGHTYELLOW_EX + Style.BRIGHT + "Configuration Completed" + Style.RESET_ALL)
     # press_any_key_to_continue()
 
 # Function to check for missing configuration variables

@@ -1,5 +1,4 @@
 # config.py
-# Version 0.0.2
 from datetime import timedelta
 import logging
 import json
@@ -16,12 +15,12 @@ import config
 FORCE_UNIVERSE = ""
 
 # If you wish to change the negative prompt
-NEGATIVE = "(worst quality, low quality, normal quality:2), blurry, bad quality, watermark, logo, (text)"
+NEGATIVE = ""
 
 # When using override mode; set your prefix and suffix to force a style to your scene
 # Ex: SCENE = "diablo 4 concept art of <SCENE>, realistic heavy details watercolor ink and acrylic, Boken"
 
-SCENE = "12k hyper realistic <SCENE>, role playing game, stunning visual masterpiece (double exposure), RAW photo, depth of field, illuminated, film grain super 8mm"
+SCENE = "vintage postcard of the 60s, <SCENE>, hyper-realistic dystopian urban art, crisp winter palette, bioluminescent accents, gothcore rudolph belarski, Melancholic and introspective lens"
 
 # When using override mode; Force a specific Style
 # Style Options: "BOKEH", "CINEMATIC", "CREATIVE", "FASHION", "FILM", "FOOD", "HDR",
@@ -32,7 +31,7 @@ STYLE = "CINEMATIC"
 
 # Location of the prompt scene and structure csv you wish to used
 SCENES_FILE_PATH = 'config-files/scene.csv'
-STRUCTURE_CSV_PATH = 'config-files/structure.csv'
+STRUCTURE_CSV_PATH = 'config-files/structure-rich.csv'
 
 ### END OF CUSTOM VALUE ###
 
@@ -61,11 +60,13 @@ RENDER_MODE = "Leonardo"
 # RENDER_MODE = "Civitai"
 # RENDER_MODE = "Midjourney"
 # RENDER_MODE = "Dalle"
+# RENDER_MODE = "SeeArt"
+# RENDER_MODE = "sd3"
 
 # Number of times we generate all image from the scene list
+MAX_CONCURRENT_JOBS = 4
 NUM_ITERATIONS = 1
-MAX_CONCURRENT_JOBS = 5
-RPS_Sleep = 0.5
+RPS_Sleep = 0.7
 
 # 16:9 Landscape Format
 IMAGE_WIDTH = 1360
@@ -83,6 +84,8 @@ PRODIA_RATE = 0.7
 MIDJOURNEY_RATE = 0.4
 DALLE_RATE = 0.8
 LEONARDO_RATE = 1
+SEEART_RATE = 1
+SD3_RATE = 1
 
 ## Conversation Mode :
 # If you want to generate image using sentence from the config-files/conversation-capture.txt
@@ -132,6 +135,8 @@ def load_override_settings(render_mode):
     elif render_mode == "Civitai":
         style_mode = settings.get("STYLE_PRODIA")
         model_mode = settings.get("REALISTIC_MODEL_CIVITAI") if realistic_mode else settings.get("CREATIVE_MODEL_CIVITAI")
+    elif render_mode == "SeeArt":
+        model_mode = settings.get("REALISTIC_MODEL_SEAART") if realistic_mode else settings.get("CREATIVE_MODEL_SEAART")
     elif render_mode == "Dalle":
         model_mode = ""
     else:
@@ -178,12 +183,31 @@ RATE_LIMIT_DELAY = timedelta(seconds=2)
 API_CALL_DELAY = 2
 
 ## Array of model to use randomly
-LEONARDO_MODEL_IDS = '["5c232a9e-9061-4777-980a-ddc8e65647c6", "aa77f04e-3eec-4034-9c07-d0f619684628", "1e60896f-3c26-4296-8ecc-53e2afecc132"]'
+LEONARDO_MODEL_IDS = '["1e60896f-3c26-4296-8ecc-53e2afecc132", "aa77f04e-3eec-4034-9c07-d0f619684628"]'
+
+SEEART_MODEL_IDS = '''[
+  "8d21805b16b10b98c4004c38bb72f553",
+  "3339ac09a3846fdd50be55a8147078f4",
+  "603ce9a51243edf142730747475126ca",
+  "dd23efca8cbe7216244d3072031ddbb8"
+]'''
+
+SEEART_MODEL_IDS_FULL = '''[
+  "8d21805b16b10b98c4004c38bb72f553",
+  "be6621af631032650fa9b080e41f8412",
+  "3339ac09a3846fdd50be55a8147078f4",
+  "8b397e4333a6aba3a6795f42a08eee69",
+  "c6e4579211a0e22b4b0139d099b3ed05",
+  "dd23efca8cbe7216244d3072031ddbb8",
+  "39ff227868303a8c5746465f9c91c720",
+  "205c330b15405a87ada08eae54c0e56b"
+]'''
 
 PRODIA_MODEL_IDS = '''[
-  "dreamshaperXL10_alpha2.safetensors [c8afe2ef]",
+  "realvisxlV40.safetensors [f7fdcb51]",
   "dynavisionXL_0411.safetensors [c39cc051]",
   "juggernautXL_v45.safetensors [e75f5471]",
+  "turbovisionXL_v431.safetensors [78890989]",
   "realismEngineSDXL_v10.safetensors [af771c3f]"
 ]'''
 
@@ -198,6 +222,25 @@ CIVITAI_MODEL_IDS = '''[
 ## Array of style to use randomly
 
 LEONARDO_STYLES = '''[
+"BOKEH",
+"CINEMATIC",
+"CREATIVE",
+"FASHION",
+"FILM",
+"FOOD",
+"HDR",
+"MACRO",
+"MINIMALIST",
+"MONOCHROME",
+"MOODY",
+"NEUTRAL",
+"PORTRAIT",
+"RETRO",
+"UNPROCESSED",
+"VIBRANT"
+]'''
+
+LEONARDO_STYLES_ORIGINAL = '''[
 "CINEMATIC",
 "CREATIVE",
 "PHOTOGRAPHY",
@@ -209,28 +252,6 @@ LEONARDO_STYLES = '''[
 LEONARDO_STYLES_ANIME = '''[
 "ANIME",
 "SKETCH_COLOR"
-]'''
-
-LEONARDO_STYLES_FULL = '''[
-"Bokeh",
-"Cinematic",
-"Creative",
-"Fashion",
-"Film",
-"Food",
-"HDR",
-"Long Exposure",
-"Macro",
-"Minimalist",
-"Monochrome",
-"Moody",
-"Neutral",
-"Portrait",
-"Retro",
-"Stock Photo",
-"Unprocessed",
-"Vibrant",
-"None"
 ]'''
 
 PRODIA_STYLES = '''[
@@ -290,31 +311,39 @@ JOB_FOLDER = f"./output/{JOB}"
 
 
 ############## API KEY
+### Do not include Bearer as a prefix to your API key
 
 # API settings LEONARDO
+LEONARDO_TOKEN = "INSERT API KEY HERE"
 API_BASE_URL = 'https://cloud.leonardo.ai/api/rest/v1/'
-LEONARDO_TOKEN = "ENTER-API-KEY-HERE"
 AUTHORIZATION_TOKEN = f'Bearer {LEONARDO_TOKEN}'
 
-# API settings OPENAI
-OPENAI_API_KEY = "ENTER-API-KEY-HERE"
+# API Settings OPENAI
+OPENAI_API_KEY = 'INSERT API KEY HERE'
 
 # API Settings TENSORART
 URL = "ap-east-1.tensorart.cloud"
-APP_ID = "ENTER-API-KEY-HERE"
+APP_ID = "INSERT APP ID HERE"
 PRIVATE_KEY_PATH = "input/tensorart_private_key.pem"
 
 # API Settings CivitAI
-CIVITAI_TOKEN = "ENTER-API-KEY-HERE"
+CIVITAI_TOKEN = "INSERT API KEY HERE"
 
 # API Settings PRODIA
-PRODIA_TOKEN = "ENTER-API-KEY-HERE"
+PRODIA_TOKEN = "INSERT API KEY HERE"
 
 # API Settings Mirdjourney
-MIDJOURNEY_TOKEN = "ENTER-API-KEY-HERE"
+MIDJOURNEY_TOKEN = "INSERT API KEY HERE"
 
 # API Settings Dalle
-DALLE_TOKEN = "ENTER-API-KEY-HERE"
+DALLE_TOKEN = "INSERT API KEY HERE"
+
+# API Settings SD3
+SD3_TOKEN = "INSERT API KEY HERE"
+
+# API Settings Seeart
+# Format: Client ID #&# Secret
+SEEART_TOKEN = "INSERT API KEY HERE"
 
 # Headers with the authorization token for API calls
 HEADERS = {

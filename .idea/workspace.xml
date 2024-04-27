@@ -6,7 +6,12 @@
   <component name="ChangeListManager">
     <list default="true" id="0f6a8c69-5d65-4287-92a1-167033b73371" name="Changes" comment="Version 0.2">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config-files/scene.csv" beforeDir="false" afterPath="$PROJECT_DIR$/config-files/scene.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/config.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/image_downloader.py" beforeDir="false" afterPath="$PROJECT_DIR$/image_downloader.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/job_manager.py" beforeDir="false" afterPath="$PROJECT_DIR$/job_manager.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/job_payload_creator.py" beforeDir="false" afterPath="$PROJECT_DIR$/job_payload_creator.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -14,6 +19,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="Git.Settings">
+    <branch-grouping />
     <option name="PUSH_TAGS">
       <GitPushTagMode>
         <option name="argument" value="--tags" />
@@ -21,6 +27,20 @@
       </GitPushTagMode>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;Anashel-RPG&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="selectedUrlAndAccountId">
+      <UrlAndAccount>
+        <option name="accountId" value="9ce41a90-81e0-4384-9c9f-d0e9186fb657" />
+        <option name="url" value="https://github.com/Anashel-RPG/echoai.git" />
+      </UrlAndAccount>
+    </option>
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -67,7 +87,7 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="SDK_NAME" value="Python 3.12" />
+      <option name="SDK_NAME" value="Python 3.11 (EchoAI)" />
       <option name="WORKING_DIRECTORY" value="" />
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
@@ -91,7 +111,6 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="SDK_NAME" value="Python 3.12" />
       <option name="WORKING_DIRECTORY" value="" />
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
@@ -132,7 +151,13 @@
       <workItem from="1705714902011" duration="24000" />
       <workItem from="1710116480047" duration="610000" />
       <workItem from="1710603898068" duration="3287000" />
-      <workItem from="1710607814596" duration="478000" />
+      <workItem from="1710607814596" duration="1322000" />
+      <workItem from="1711378966077" duration="52000" />
+      <workItem from="1711379055980" duration="182000" />
+      <workItem from="1711389871101" duration="598000" />
+      <workItem from="1711731932910" duration="559000" />
+      <workItem from="1714186245086" duration="20324000" />
+      <workItem from="1714233414124" duration="2804000" />
     </task>
     <task id="LOCAL-00001" summary="Version 0.2">
       <option name="closed" value="true" />
@@ -150,7 +175,15 @@
       <option name="project" value="LOCAL" />
       <updated>1710608013682</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Version 0.2">
+      <option name="closed" value="true" />
+      <created>1710608321394</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1710608321394</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -190,7 +223,7 @@
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/echoai$Ranking.coverage" NAME="Ranking Coverage Results" MODIFIED="1710100918091" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
     <SUITE FILE_PATH="coverage/echoai$Generate.coverage" NAME="Generate Coverage Results" MODIFIED="1710100974325" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
-    <SUITE FILE_PATH="coverage/audio_py$Generating.coverage" NAME="Generating Coverage Results" MODIFIED="1710604832629" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/audio_py$Generating.coverage" NAME="Generating Coverage Results" MODIFIED="1714242735435" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
     <SUITE FILE_PATH="coverage/Python_Project$index.coverage" NAME="index Coverage Results" MODIFIED="1694913972904" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/python-worker-hello-world" />
     <SUITE FILE_PATH="coverage/audio_py$Ranking.coverage" NAME="Ranking Coverage Results" MODIFIED="1710604093009" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
   </component>
