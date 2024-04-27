@@ -47,7 +47,7 @@ logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(
 # Customize your CONFIG if you don't want to use the wizard at launch
 # WARNING: some combination of config value won't work
 # Fore example, using broadcast mode with override mode will not work
-# Echoai can also work with Dalle, CivitAI, Prodia and a Midjourney provider
+# Echoai can also work with Dalle, CivitAI, Prodia, SD3, Leonardo and Midjourney provider
 # But this is a beta features and might not work as expected.
 
 ############## RANDOM PROVIDER
